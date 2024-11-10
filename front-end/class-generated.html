@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sua Aula</title>
+    <link rel="shortcut icon" href="assets/Frame.png" type="image/x-icon">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="css/create-class.css">
+</head>
+<body>
+    <section class="container">
+        
+        <div class="sidebar">
+          <div class="menu-btn">
+            <i class="ph-bold ph-caret-left"></i>
+          </div>
+          <div class="head">
+            <div class="user-img">
+              <img src="./assets/user.jpeg" alt="professora" />
+            </div>
+            <div class="user-details">
+              <p class="title">Professora</p>
+              <p class="name">Lilian Carvalho</p>
+            </div>
+          </div>
+          <div class="nav">
+            <div class="menu">
+              <p class="title">Principal</p>
+              <ul>
+                <li>
+                  <a href="/create-class.html">
+                    <i class="icon ph-bold ph-house-simple"></i>
+                    <span class="text">Criar Aula</span>
+                  </a>
+                </li>
+                <li>
+                <li class="active">
+                  <a href="#">
+                    <i class="icon ph-bold ph-file-text"></i>
+                    <span class="text">Aulas Geradas</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <i class="icon ph-bold ph-calendar-blank"></i>
+                    <span class="text">Aulas</span>
+                  </a>
+                </li>
+            </div>
+            <div class="menu">
+              <p class="title">Dados</p>
+              <ul>
+                <li>
+                  <a href="#">
+                    <i class="icon ph-bold ph-gear"></i>
+                    <span class="text">Relatórios</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="menu">
+            <p class="title">Conta</p>
+            <ul>
+              <li>
+                <a href="#">
+                  <i class="icon ph-bold ph-info"></i>
+                  <span class="text">Ajuda</span>
+                </a>
+              </li>
+              <li>
+                <a href="/index.html">
+                  <i class="icon ph-bold ph-sign-out"></i>
+                  <span class="text">Sair</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <section class="container">
+          <div class="content">
+              <h1 class="CreateClass">Resumo da sua aula</h1>
+              <div class="responseIA">Carregando...</div> 
+              <div>
+                  <button type="button" class="button-reprovar">Reprovar</button>
+                  <button type="button" class="button-aprovar">Aprovar</button>
+                  <button type="button" class="button-recarregar">Recarregar</button>
+              </div>
+          </div>
+      </section>
+
+        <script type="module">
+          document.addEventListener("DOMContentLoaded", async () => {
+              const responseIA = document.querySelector(".responseIA");
+              try {
+                  const response = await fetch('https://llama3projectbasic-2.onrender.com/ia', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ tema: "opcao_selecionada" }) 
+                  });
+
+                  if (response.ok) {
+                      const data = await response.json();
+                      responseIA.textContent = data.reply; 
+                  } else {
+                      responseIA.textContent = "Erro ao obter resposta";
+                  }
+              } catch (error) {
+                  console.error("Erro ao fazer a requisição:", error);
+                  responseIA.textContent = "Erro ao fazer a requisição";
+              }
+
+              document.querySelector(".button-reprovar")?.addEventListener("click", () => {
+                  window.location.href = "/create-class.html";
+              });
+
+              document.querySelector(".button-aprovar")?.addEventListener("click", () => {
+                  alert("Aula aprovada!");
+              });
+
+              document.querySelector(".button-recarregar")?.addEventListener("click", () => {
+                  window.location.reload();
+              });
+          });
+        </script>
+
+<!-- Jquery -->
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.js"
+  integrity="sha512-8Z5++K1rB3U+USaLKG6oO8uWWBhdYsM3hmdirnOEWp8h2B1aOikj5zBzlXs8QOrvY9OxEnD2QDkbSKKpfqcIWw=="
+  crossorigin="anonymous"
+></script>
+<script src="js/script.js"></script>
+</body>
+</html>

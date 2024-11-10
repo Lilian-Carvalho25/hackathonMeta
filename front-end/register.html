@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="shortcut icon" href="assets/Frame.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <a href="/index.html">
+            <img src="assets/logo (1).png" alt="Logo"  class="login-logo"></a>
+            <h2 class="login-title">Seja bem vindo de volta!</h2>
+            <form id="login-form">
+                <input type="email" id="email" placeholder="Email" class="login-input" required>
+                <input type="password" id="password" placeholder="Senha" class="login-input" required>
+                <button type="submit" class="login-button">Entrar</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Quando o formulário for enviado
+        document.getElementById('login-form').addEventListener('submit', async function(event) {
+            event.preventDefault(); // Evitar o envio padrão do formulário
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            // Realiza a requisição POST para o backend
+            try {
+                const response = await fetch('http://localhost:3000/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        senha: password
+                    }),
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    // Sucesso: Armazenar o token no localStorage ou em uma variável de sessão
+                    localStorage.setItem('token', data.token);  // Armazena o token no localStorage
+                    alert('Login bem-sucedido!');
+                    // Redirecionar para a página desejada
+                    window.location.href = '/create-class.html';
+                } else {
+                    // Erro: Exibe uma mensagem de erro
+                    alert(data.message || 'Erro ao fazer login');
+                }
+            } catch (error) {
+                console.error('Erro ao tentar autenticar:', error);
+                alert('Erro ao tentar autenticar');
+            }
+        });
+    </script>
+</body>
+</html>

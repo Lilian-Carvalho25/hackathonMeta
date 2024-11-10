@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body, html {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: url(../../assets/fundo-destaque.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center left;
+    font-family: "Poppins", serif;
+}
+
+.login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+   
+}
+
+.login-box {
+    width: 100%;
+    max-width: 800px;
+    padding: 2rem;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border-radius: 8px;
+}
+
+.login-logo {
+    width: 100px;
+    margin-bottom: 1rem;
+}
+
+.login-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+.login-input {
+    width: 70%;
+    padding: 0.8rem;
+    margin: 0.5rem 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.login-button {
+    width: 50%;
+    padding: 0.8rem;
+    margin-top: 1rem;
+    border: none;
+    border-radius: 4px;
+    background-color: #403e8c;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+a {
+    text-decoration: none; 
+    color: inherit; 
+    font-size: inherit; 
+    font-weight: inherit; 
+    font-family: inherit; 
+    cursor: pointer; 
+  }
+
+.login-button:hover {
+    background-color: #ffff;
+    border: #403e8c solid 2px;
+    transition: 1s;
+    color: #403e8c;
+}
+
+.select-container {
+    margin: 20px 0;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  select {
+    width: 70%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    font-size: 1rem;
+    color: #333;
+    cursor: pointer;
+  }
+  

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar sala</title>
+    <link rel="shortcut icon" href="assets/Frame.png" type="image/x-icon">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="css/create-class.css">
+</head>
+<body>
+  <section class="container">
+        
+    <div class="sidebar">
+      <div class="menu-btn">
+        <i class="ph-bold ph-caret-left"></i>
+      </div>
+      <div class="head">
+        <div class="user-img">
+          <img src="./assets/user.jpeg" alt="professora" />
+        </div>
+        <div class="user-details">
+          <p class="title">Professora</p>
+          <p class="name">Lilian Carvalho</p>
+        </div>
+      </div>
+      <div class="nav">
+        <div class="menu">
+          <p class="title">Principal</p>
+          <ul>
+            <li>
+              <a href="/create-class.html">
+                <i class="icon ph-bold ph-house-simple"></i>
+                <span class="text">Criar Aula</span>
+              </a>
+            </li>
+            <li>
+            <li class="active">
+              <a href="#">
+                <i class="icon ph-bold ph-file-text"></i>
+                <span class="text">Aulas Geradas</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class="icon ph-bold ph-calendar-blank"></i>
+                <span class="text">Aulas</span>
+              </a>
+            </li>
+        </div>
+        <div class="menu">
+          <p class="title">Dados</p>
+          <ul>
+            <li>
+              <a href="#">
+                <i class="icon ph-bold ph-gear"></i>
+                <span class="text">Relatórios</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="menu">
+        <p class="title">Conta</p>
+        <ul>
+          <li>
+            <a href="#">
+              <i class="icon ph-bold ph-info"></i>
+              <span class="text">Ajuda</span>
+            </a>
+          </li>
+          <li>
+            <a href="/index.html">
+              <i class="icon ph-bold ph-sign-out"></i>
+              <span class="text">Sair</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+        <section class="container">
+            <div class="content">
+                <h1 class="CreateClass">Criar Aula</h1>
+                <div class="select-container">
+                    <label for="options">Escolha o Tema da Aula</label>
+                    <select id="options">
+                        <option value="opcao1">Aula de contos - Zumbi dos Palmares</option>
+                        <option value="opcao2">Aula sobre o Quilombo dos Palmares e o papel de Zumbi como líder</option>
+                        <option value="opcao3">Sobre a resistência de Zumbi dos Palmares e seu impacto na cultura afro-brasileira</option>
+                        <option value="opcao4">Perguntas e respostas sobre a vida e os feitos de Zumbi dos Palmares</option>
+                        <option value="opcao5">Aula sobre Zumbi dos Palmares explicando sua importância na luta contra a escravidão</option>
+                    </select>
+                </div>
+                <button id="generateButton">Gerar</button>
+            </div>
+        </section>
+    </section>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+          const generateButton = document.getElementById("generateButton");
+
+          if (generateButton) {
+              generateButton.addEventListener("click", async () => {
+                  const selectedOption = document.getElementById("options").value;
+
+                  try {
+                      const response = await fetch('https://llama3projectbasic-2.onrender.com/ia', {
+                          method: 'POST',
+                          headers: { 'Content-Type': 'application/json' },
+                          body: JSON.stringify({ tema: selectedOption })
+                      });
+
+                      const data = await response.json();
+                      localStorage.setItem('iaResponse', data.response);
+                      window.location.href = '/class-generated.html';
+                  } catch (error) {
+                      console.error('Erro ao fazer a requisição:', error);
+                  }
+              });
+          }
+      });
+  </script>
+
+</body>
+</html>
